@@ -5,6 +5,7 @@ const logger = Logger.getInstance()
 
 export class Discord {
     private readonly _client: Client
+    private static _instance: Discord
 
     constructor(token: string) {
         this._client = new Client({
@@ -12,14 +13,12 @@ export class Discord {
                 GatewayIntentBits.Guilds
             ]
         })
-
         this._client.on('ready', () => {
             logger.info('[BOT] Bot is ready!');
         });
       
         this._client.on('messageCreate', (message) => {
             if (message.author.bot) return;
-      
             logger.info(`[Message] Received message: ${message.content}`);
         });
       
@@ -28,7 +27,16 @@ export class Discord {
         });
     }
 
-    public getClient(): Client {
+    getClient(): Client {
         return this._client;
     }
+
+    static getInstance(token: string): Discord {
+        if(!Discord._instance) {
+            Discord._instance = new Discord(token)
+        }
+
+        return Discord._instance
+    }
+
 }
