@@ -1,5 +1,6 @@
 import { Discord } from "./config/discord";
 import { config } from "dotenv";
+import { registerCommands } from './modules/command/services/command.service';
 
 config()
 
@@ -11,4 +12,6 @@ if(!token) {
 }
 
 const discord = Discord.getInstance(token)
-const client = discord.getClient()
+export const client = discord.getClient()
+
+registerCommands()
