@@ -14,16 +14,16 @@ export class Discord {
             ]
         })
         this._client.on('ready', () => {
-            logger.info('[BOT] Bot is ready!');
+            logger.info('Bot is ready!');
         });
       
         this._client.on('messageCreate', (message) => {
             if (message.author.bot) return;
-            logger.info(`[Message] Received message: ${message.content}`);
+            logger.info(`Received message: ${message.content}`);
         });
       
         this._client.login(token).then(() => {
-            logger.info('[BOT]Logged in!');
+            logger.info('Logged in!');
         });
     }
 
